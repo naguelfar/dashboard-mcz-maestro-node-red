@@ -10,7 +10,7 @@ Récupération des informations du poêle MCZ (Loop) via leur API Maestro en uti
 
 ## Disclaimer
 - le script est fourni en l'état et nécessite peut-être des adaptations à votre API (sur l'ordre des éléments récupérés)
-- le script fourni aussi un exemple pour écrire / modifier la configuration (par défaut désactiver). __ATTENTION__ à ce que vous faites, vous êtes responsable de son utilisation et des dysfonctionnement que vous pourriez engendrer en modifiant la configuration de votre poêle. Dans le doute contentez vous de récupérer seulement les informations, c'est sans danger.
+- le script fourni aussi un exemple pour écrire / modifier la configuration (par défaut désactivé). __ATTENTION__ à ce que vous faites, vous êtes responsable de son utilisation et des dysfonctionnements que vous pourriez engendrer en modifiant la configuration de votre poêle. Dans le doute contentez-vous de récupérer seulement les informations, c'est sans danger.
 - le code est largement perfectible / optimisable (utilisation de switch par exemple) n'hésitez pas à partager vos modifications.
 
 ## Crédit
