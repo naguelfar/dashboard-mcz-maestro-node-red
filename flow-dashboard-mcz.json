@@ -1,0 +1,652 @@
+[
+    {
+        "id": "547cd5bb.6e5b94",
+        "type": "tab",
+        "label": "Dashboard MCZ",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "72b8df8b.86b458",
+        "type": "websocket in",
+        "z": "547cd5bb.6e5b94",
+        "name": "MCZ API",
+        "server": "",
+        "client": "8bae72a3.51491",
+        "x": 100,
+        "y": 460,
+        "wires": [
+            [
+                "62d1906d.b72178",
+                "975f4913.5b375",
+                "d5add492.50aff",
+                "3631a0b.762656",
+                "79d5b12.e2c5d5",
+                "5b3d84b7.8e3134",
+                "39c617b9.53399"
+            ]
+        ]
+    },
+    {
+        "id": "62d1906d.b72178",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 420,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "953fb1fc.a24e98",
+        "type": "websocket out",
+        "z": "547cd5bb.6e5b94",
+        "name": "MCZ API",
+        "server": "",
+        "client": "8bae72a3.51491",
+        "x": 400,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a3432b9f.6f4888",
+        "type": "inject",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "C|RecuperoInfo",
+        "payloadType": "str",
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "953fb1fc.a24e98"
+            ]
+        ]
+    },
+    {
+        "id": "975f4913.5b375",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Temp",
+        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [6];\ntemp = parseInt(temp,16)/2;\n\nmsg.payload = temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "9b70cfd6.3b6d28",
+                "946883d5.d289e",
+                "4952830c.a74afc",
+                "63c8ae71.b28cb"
+            ]
+        ]
+    },
+    {
+        "id": "9b70cfd6.3b6d28",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Temperature",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d5add492.50aff",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Libellé Etat",
+        "func": "tab = msg.payload.split(\"|\");\nindexEtat = parseInt(tab [1],16);\n\ndata = [{code:0,libelle: \"Eteint\"},\n{code:1,libelle: \"Controle du poele froid / chaud\"},\n{code:2,libelle: \"Clean Froid\"},\n{code:3,libelle: \"Load Froid\"},\n{code:4,libelle: \"Start 1 Froid\"},\n{code:5,libelle: \"Start 2 Froid\"},\n{code:6,libelle: \"Clean Chaud\"},\n{code:7,libelle: \"Load Chaud\"},\n{code:8,libelle: \"Start 1 chaud\"},\n{code:9,libelle: \"Start 2 chaud\"},\n{code:10,libelle: \"Stabilisation\"},\n{code:11,libelle: \"Puissance 1\"},\n{code:12,libelle: \"Puissance 2\"},\n{code:13,libelle: \"Puissance 3\"},\n{code:14,libelle: \"Puissance 4\"},\n{code:15,libelle: \"Puissance 5\"},\n{code:30,libelle: \"Mode diagnostique\"},\n{code:31,libelle: \"Marche\"},\n{code:40,libelle: \"Extinction\"},\n{code:41,libelle: \"Refroidissement en cours\"},\n{code:42,libelle: \"Nettoyage basse p.\"},\n{code:43,libelle: \"Nettoyage haute p.\"},\n{code:44,libelle: \"Débloquage vis sans fin\"},\n{code:45,libelle: \"AUTO ECO\"},\n{code:46,libelle: \"Standby\"},\n{code:48,libelle: \"Diagnostique\"},\n{code:49,libelle: \"CHARG. VIS SANS FIN\"},\n{code:50,libelle: \"Erreur A01 - Allumage raté\"},\n{code:51,libelle: \"Erreur A02 - Pas de flamme\"},\n{code:52,libelle: \"Erreur A03 - Surchauffe du réservoir\"},\n{code:53,libelle: \"Erreur A04 - Température des fumées trop haute\"},\n{code:54,libelle: \"Erreur A05 - Obstruction conduit - Vent\"},\n{code:55,libelle: \"Erreur A06 - Mauvais tirage\"},\n{code:56,libelle: \"Erreur A09 - Défaillance sonde de fumées\"},\n{code:57,libelle: \"Erreur A11 - Défaillance motoréducteur\"},\n{code:58,libelle: \"Erreur A13 - Température carte mère trop haute\"},\n{code:59,libelle: \"Erreur A14 - Défaut Active\"},\n{code:60,libelle: \"Erreur A18 - Température d'eau trop haute\"},\n{code:61,libelle: \"Erreur A19 - Défaut sonde température eau\"},\n{code:62,libelle: \"Erreur A20 - Défaut sonde auxiliaire\"},\n{code:63,libelle: \"Erreur A21 - Alarme pressostat\"},\n{code:64,libelle: \"Erreur A22 - Défaut sonde ambiante\"},\n{code:65,libelle: \"Erreur A23 - Défaut fermeture brasero\"},\n{code:66,libelle: \"Erreur A12 - Panne controleur motoréducteur\"},\n{code:67,libelle: \"Erreur A17 - Bourrage vis sans fin\"},\n{code:69,libelle: \"Attente Alarmes securité\"}];\n\netat = data.find(tmp => tmp.code === indexEtat);\n\nmsg.payload = etat.libelle;\n\n\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 410,
+        "y": 600,
+        "wires": [
+            [
+                "77e0a055.668068",
+                "dc157e51.54978",
+                "7f47e6cc.23e23"
+            ]
+        ]
+    },
+    {
+        "id": "7f47e6cc.23e23",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Etat",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3631a0b.762656",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "TempConsigne",
+        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [26];\ntemp = parseInt(temp,16)/2;\n\nmsg.payload = temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 420,
+        "y": 680,
+        "wires": [
+            [
+                "5ef9ab3b.dfc23c",
+                "7d2dfaf9.a409cc"
+            ]
+        ]
+    },
+    {
+        "id": "5ef9ab3b.dfc23c",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Temperature",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "79d5b12.e2c5d5",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Eco",
+        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [23];\nstate = \"Désactivé\"\nif (temp===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 410,
+        "y": 760,
+        "wires": [
+            [
+                "c25ab70.5574bc8",
+                "e9dc2021.6cf41"
+            ]
+        ]
+    },
+    {
+        "id": "c25ab70.5574bc8",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Eco",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "5b3d84b7.8e3134",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Chrono",
+        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [25];\nstate = \"Désactivé\"\nif (temp===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 420,
+        "y": 840,
+        "wires": [
+            [
+                "9c6bf971.6dfd78",
+                "db3628a7.ff97b"
+            ]
+        ]
+    },
+    {
+        "id": "9c6bf971.6dfd78",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Chrono",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "946883d5.d289e",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "fb0a0886.53a18",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Température",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 590,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "77e0a055.668068",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "b19a5d3f.a5cc58",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Etat",
+        "label": "Etat du pôele :",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 570,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "7d2dfaf9.a409cc",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "fb0a0886.53a18",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Température déclenchement",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 640,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e9dc2021.6cf41",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "fb0a0886.53a18",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Mode Eco",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 590,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "db3628a7.ff97b",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "fb0a0886.53a18",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Mode Chrono",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "39c617b9.53399",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Régulation",
+        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [22];\nstate = \"Manuelle\"\nif (temp===\"01\")\n    state = \"Automatique\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 430,
+        "y": 940,
+        "wires": [
+            [
+                "b7a21a6.92e3a68",
+                "acfc8b6a.92eee8"
+            ]
+        ]
+    },
+    {
+        "id": "b7a21a6.92e3a68",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Régulation",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "acfc8b6a.92eee8",
+        "type": "ui_text",
+        "z": "547cd5bb.6e5b94",
+        "group": "fb0a0886.53a18",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Régulation",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 650,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "4952830c.a74afc",
+        "type": "ui_gauge",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "group": "b19a5d3f.a5cc58",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp. actuelle",
+        "label": "",
+        "format": "{{value}} °C",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#0a8ccd",
+            "#00f900",
+            "#ffaa00"
+        ],
+        "seg1": "20",
+        "seg2": "21",
+        "x": 600,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "63c8ae71.b28cb",
+        "type": "ui_chart",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "group": "b19a5d3f.a5cc58",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Historique températures",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc157e51.54978",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Filtre état On / Off",
+        "func": "etat = msg.payload\nif(etat == \"Standby\" || etat == \"Eteint\" || etat == \"Refroidissement en cours\"){\n    msg.payload = \"0\"\n}\nelse{\n    msg.payload = 1\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "b4599768.c09818",
+                "1cd3da8f.84327d"
+            ]
+        ]
+    },
+    {
+        "id": "b4599768.c09818",
+        "type": "ui_chart",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "group": "b19a5d3f.a5cc58",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Marche / Arret",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 820,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1daff22a.606856",
+        "type": "comment",
+        "z": "547cd5bb.6e5b94",
+        "name": "Liste des paramètres",
+        "info": "RecuperoInfo=[\n[1,« Etat du poêle »,[\n[0, « Eteint »],\n[1, « Controle du poele froid / chaud »],\n[2, « Clean Froid »],\n[3, « Load Froid »],\n[4, « Start 1 Froid »],\n[5, « Start 2 Froid »],\n[6, « Clean Chaud »],\n[7, « Load Chaud »],\n[8, « Start 1 chaud »],\n[9, « Start 2 chaud »],\n[10, « Stabilisation »],\n[11, « Puissance 1 »],\n[12, « Puissance 2 »],\n[13, « Puissance 3 »],\n[14, « Puissance 4 »],\n[15, « Puissance 5 »],\n[30, « Mode diagnostique »],\n[31, « Marche »],\n[40, « Extinction »],\n[41, « Refroidissement en cours »],\n[42, « Nettoyage basse p. »],\n[43, « Nettoyage haute p. »],\n[44, « Debloquage vis sans fin »],\n[45, « AUTO ECO »],\n[46, « Standby »],\n[48, « Diagnostique »],\n[49, « CHARG. VIS SANS FIN »],\n[50, « Erreur A01 - Allumage rate »],\n[51, « Erreur A02 - Pas de flamme »],\n[52, « Erreur A03 - Surchauffe du reservoir »],\n[53, « Erreur A04 - Temperature des fumees trop haute »],\n[54, « Erreur A05 - Obstruction conduit - Vent »],\n[55, « Erreur A06 - Mauvais tirage »],\n[56, « Erreur A09 - Defaillance sonde de fumees »],\n[57, « Erreur A11 - Defaillance motoreducteur »],\n[58, « Erreur A13 - Temperature carte mere trop haute »],\n[59, « Erreur A14 - Defaut Active »],\n[60, « Erreur A18 - Temperature d’eau trop haute »],\n[61, « Erreur A19 - Defaut sonde température eau »],\n[62, « Erreur A20 - Defaut sonde auxiliaire »],\n[63, « Erreur A21 - Alarme pressostat »],\n[64, « Erreur A22 - Defaut sonde ambiante »],\n[65, « Erreur A23 - Defaut fermeture brasero »],\n[66, « Erreur A12 - Panne controleur motoreducteur »],\n[67, « Erreur A17 - Bourrage vis sans fin »],\n[69, « Attente Alarmes securite »],\n]],\n[2,« Etat du ventilateur d’ambiance »,[\n[0, « Desactive »],\n[1, « Niveau 1 »],\n[2, « Niveau 2 »],\n[3, « Niveau 3 »],\n[4, « Niveau 4 »],\n[5, « Niveau 5 »],\n[6, « Automatique »],\n]],\n[3,« Etat du ventilateur canalise 1 »,[\n[0, « Desactive »],\n[1, « Niveau 1 »],\n[2, « Niveau 2 »],\n[3, « Niveau 3 »],\n[4, « Niveau 4 »],\n[5, « Niveau 5 »],\n[6, « Automatique »],\n]],\n[4,« Etat du ventilateur canalise 2 »,[\n[0, « Desactive »],\n[1, « Niveau 1 »],\n[2, « Niveau 2 »],\n[3, « Niveau 3 »],\n[4, « Niveau 4 »],\n[5, « Niveau 5 »],\n[6, « Automatique »],\n]],\n[5,« Température des fumées »],\n[6,« Température ambiante »],\n[7,« Puffer Température »], # !=255 == Hydro\n[8,« Température chaudiére »],\n[9,« Température NTC3 »], # !=255 == Hydro\n[10,« Etat de la bougie »],\n[11,« ACTIVE - Set »],\n[12,« RPM - Ventilateur fummées »],\n[13,« RPM - Vis sans fin - SET »],\n[14,« RPM - Vis sans fin - LIVE »],\n[15,« Valve 3 voies »], # 1= Sani !1= Risc ==Hydro\n[16,« Alimentation pompe »],\n[17,« Brazero »,[\n[0, « OK »],\n[101, « Ouverture brazero »],\n[100, « Fermeture brazero »],\n]], # !==Matic\n[18,« Profile »,[\n[0, « Manuel »],\n[1, « Dynamic »],\n[2, « Overnight »],\n[3, « Comfort »],\n[4, « Power 110% »],\n[10, « Mode Adaptatif »],\n]],\n[19,« Modbus address »],\n[20,« Etat du mode Active »], #0: Désactivé, 1: Activé\n[21,« ACTIVE - Live »],\n[22,« Mode de régulation »,[\n[0, « Manuelle »],\n[1, « Dynamique »],\n]],\n[23,« Mode ECO »],\n[24,« Silence »],\n[25,« Mode Chronotermostato »],\n[26,« TEMP - Consigne »],\n[27,« TEMP - Boiler »],\n[28,« TEMP - Carte mère »],\n[29,« Puissance Active »,[\n[11, « Puissance 1 »],\n[12, « Puissance 2 »],\n[13, « Puissance 3 »],\n[14, « Puissance 4 »],\n[15, « Puissance 5 »],\n]],\n[32,« Heure du poêle (0-23) »],\n[33,« Minutes du poêle (0-59) »],\n[34,« Jour du poêle (1-31) »],\n[35,« Mois du poêle (1-12) »],\n[36,« Année du poêle »],\n[37,« Heures de fonctionnement total (s) »],\n[38,« Heures de fonctionnement en puissance 1 (s) »],\n[39,« Heures de fonctionnement en puissance 2 (s) »],\n[40,« Heures de fonctionnement en puissance 3 (s) »],\n[41,« Heures de fonctionnement en puissance 4 (s) »],\n[42,« Heures de fonctionnement en puissance 5 (s) »],\n[43,« Heures avant entretien »],\n[44,« Minutes avant extinction »],\n[45,« Nombre d’allumages »],\n[46,« Temperature active »],\n[47,« Farenheit »,[\n[0, « Celcius »],\n[1, « Farenheit »],\n]],\n[48,« Effet sonore »],\n[49,« Etat effets sonores »],\n[50,« Sleep »],\n[51,« Mode »,[\n[0, « Hiver »],\n[1, « Ete »],\n]],\n[52,« Sonde wifi temperature 1 »],\n[53,« Sonde wifi temperature 2 »],\n[54,« Sonde wifi temperature 3 »],\n[55,« Inconnu »], # !==Suppose que c’est le retour d info sur le niveau de pellet\n[56,« Set Puffer »],\n[57,« Set Boiler »],\n[58,« Set Health »], # !==Hydro\n[59,« Température retour »],\n[60,« Antigele »],\n]",
+        "x": 440,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d10dfcef.c253c8",
+        "type": "websocket out",
+        "z": "547cd5bb.6e5b94",
+        "d": true,
+        "name": "",
+        "server": "",
+        "client": "8bae72a3.51491",
+        "x": 680,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "2cef4314.aec1d4",
+        "type": "inject",
+        "z": "547cd5bb.6e5b94",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "C|WriteParametri|23|00",
+        "payloadType": "str",
+        "x": 400,
+        "y": 1120,
+        "wires": [
+            [
+                "d10dfcef.c253c8"
+            ]
+        ]
+    },
+    {
+        "id": "1cd3da8f.84327d",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "193badc6.8456c2",
+        "type": "comment",
+        "z": "547cd5bb.6e5b94",
+        "name": "With great power comes great responsibility",
+        "info": "1111 -> O/1 chrono off / on",
+        "x": 570,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "8bae72a3.51491",
+        "type": "websocket-client",
+        "path": "ws://192.168.120.1:81/",
+        "tls": "",
+        "wholemsg": "false"
+    },
+    {
+        "id": "fb0a0886.53a18",
+        "type": "ui_group",
+        "name": "Rapport",
+        "tab": "e202dce0.bc10f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b19a5d3f.a5cc58",
+        "type": "ui_group",
+        "name": "State",
+        "tab": "c1d0735d.51287",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e202dce0.bc10f",
+        "type": "ui_tab",
+        "name": "Récap Infos",
+        "icon": "fa-cogs",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c1d0735d.51287",
+        "type": "ui_tab",
+        "name": "Infos",
+        "icon": "fa-fire",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
