@@ -18,12 +18,7 @@
         "wires": [
             [
                 "62d1906d.b72178",
-                "975f4913.5b375",
-                "d5add492.50aff",
-                "3631a0b.762656",
-                "79d5b12.e2c5d5",
-                "5b3d84b7.8e3134",
-                "39c617b9.53399"
+                "deffffef.4024"
             ]
         ]
     },
@@ -31,7 +26,7 @@
         "id": "62d1906d.b72178",
         "type": "debug",
         "z": "547cd5bb.6e5b94",
-        "name": "",
+        "name": "RecuperoInfo",
         "active": false,
         "tosidebar": true,
         "console": true,
@@ -40,8 +35,8 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 420,
-        "y": 300,
+        "x": 300,
+        "y": 580,
         "wires": []
     },
     {
@@ -85,205 +80,6 @@
         ]
     },
     {
-        "id": "975f4913.5b375",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "Temp",
-        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [6];\ntemp = parseInt(temp,16)/2;\n\nmsg.payload = temp;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 390,
-        "y": 360,
-        "wires": [
-            [
-                "9b70cfd6.3b6d28",
-                "946883d5.d289e",
-                "4952830c.a74afc",
-                "63c8ae71.b28cb"
-            ]
-        ]
-    },
-    {
-        "id": "9b70cfd6.3b6d28",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Temperature",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "d5add492.50aff",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "Libellé Etat",
-        "func": "tab = msg.payload.split(\"|\");\nindexEtat = parseInt(tab [1],16);\n\ndata = [{code:0,libelle: \"Eteint\"},\n{code:1,libelle: \"Controle du poele froid / chaud\"},\n{code:2,libelle: \"Clean Froid\"},\n{code:3,libelle: \"Load Froid\"},\n{code:4,libelle: \"Start 1 Froid\"},\n{code:5,libelle: \"Start 2 Froid\"},\n{code:6,libelle: \"Clean Chaud\"},\n{code:7,libelle: \"Load Chaud\"},\n{code:8,libelle: \"Start 1 chaud\"},\n{code:9,libelle: \"Start 2 chaud\"},\n{code:10,libelle: \"Stabilisation\"},\n{code:11,libelle: \"Puissance 1\"},\n{code:12,libelle: \"Puissance 2\"},\n{code:13,libelle: \"Puissance 3\"},\n{code:14,libelle: \"Puissance 4\"},\n{code:15,libelle: \"Puissance 5\"},\n{code:30,libelle: \"Mode diagnostique\"},\n{code:31,libelle: \"Marche\"},\n{code:40,libelle: \"Extinction\"},\n{code:41,libelle: \"Refroidissement en cours\"},\n{code:42,libelle: \"Nettoyage basse p.\"},\n{code:43,libelle: \"Nettoyage haute p.\"},\n{code:44,libelle: \"Débloquage vis sans fin\"},\n{code:45,libelle: \"AUTO ECO\"},\n{code:46,libelle: \"Standby\"},\n{code:48,libelle: \"Diagnostique\"},\n{code:49,libelle: \"CHARG. VIS SANS FIN\"},\n{code:50,libelle: \"Erreur A01 - Allumage raté\"},\n{code:51,libelle: \"Erreur A02 - Pas de flamme\"},\n{code:52,libelle: \"Erreur A03 - Surchauffe du réservoir\"},\n{code:53,libelle: \"Erreur A04 - Température des fumées trop haute\"},\n{code:54,libelle: \"Erreur A05 - Obstruction conduit - Vent\"},\n{code:55,libelle: \"Erreur A06 - Mauvais tirage\"},\n{code:56,libelle: \"Erreur A09 - Défaillance sonde de fumées\"},\n{code:57,libelle: \"Erreur A11 - Défaillance motoréducteur\"},\n{code:58,libelle: \"Erreur A13 - Température carte mère trop haute\"},\n{code:59,libelle: \"Erreur A14 - Défaut Active\"},\n{code:60,libelle: \"Erreur A18 - Température d'eau trop haute\"},\n{code:61,libelle: \"Erreur A19 - Défaut sonde température eau\"},\n{code:62,libelle: \"Erreur A20 - Défaut sonde auxiliaire\"},\n{code:63,libelle: \"Erreur A21 - Alarme pressostat\"},\n{code:64,libelle: \"Erreur A22 - Défaut sonde ambiante\"},\n{code:65,libelle: \"Erreur A23 - Défaut fermeture brasero\"},\n{code:66,libelle: \"Erreur A12 - Panne controleur motoréducteur\"},\n{code:67,libelle: \"Erreur A17 - Bourrage vis sans fin\"},\n{code:69,libelle: \"Attente Alarmes securité\"}];\n\netat = data.find(tmp => tmp.code === indexEtat);\n\nmsg.payload = etat.libelle;\n\n\n\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 410,
-        "y": 600,
-        "wires": [
-            [
-                "77e0a055.668068",
-                "dc157e51.54978",
-                "7f47e6cc.23e23"
-            ]
-        ]
-    },
-    {
-        "id": "7f47e6cc.23e23",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Etat",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 790,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "3631a0b.762656",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "TempConsigne",
-        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [26];\ntemp = parseInt(temp,16)/2;\n\nmsg.payload = temp;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 420,
-        "y": 680,
-        "wires": [
-            [
-                "5ef9ab3b.dfc23c",
-                "7d2dfaf9.a409cc"
-            ]
-        ]
-    },
-    {
-        "id": "5ef9ab3b.dfc23c",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Temperature",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 810,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "79d5b12.e2c5d5",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Eco",
-        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [23];\nstate = \"Désactivé\"\nif (temp===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 410,
-        "y": 760,
-        "wires": [
-            [
-                "c25ab70.5574bc8",
-                "e9dc2021.6cf41"
-            ]
-        ]
-    },
-    {
-        "id": "c25ab70.5574bc8",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Eco",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 810,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "5b3d84b7.8e3134",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Chrono",
-        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [25];\nstate = \"Désactivé\"\nif (temp===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 420,
-        "y": 840,
-        "wires": [
-            [
-                "9c6bf971.6dfd78",
-                "db3628a7.ff97b"
-            ]
-        ]
-    },
-    {
-        "id": "9c6bf971.6dfd78",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Chrono",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 840,
-        "wires": []
-    },
-    {
-        "id": "946883d5.d289e",
-        "type": "ui_text",
-        "z": "547cd5bb.6e5b94",
-        "group": "fb0a0886.53a18",
-        "order": 5,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Température",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 590,
-        "y": 400,
-        "wires": []
-    },
-    {
         "id": "77e0a055.668068",
         "type": "ui_text",
         "z": "547cd5bb.6e5b94",
@@ -295,8 +91,8 @@
         "label": "Etat du pôele :",
         "format": "{{msg.payload}}",
         "layout": "row-center",
-        "x": 570,
-        "y": 640,
+        "x": 1090,
+        "y": 500,
         "wires": []
     },
     {
@@ -311,8 +107,8 @@
         "label": "Température déclenchement",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 640,
-        "y": 720,
+        "x": 920,
+        "y": 580,
         "wires": []
     },
     {
@@ -327,8 +123,8 @@
         "label": "Mode Eco",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 590,
-        "y": 800,
+        "x": 870,
+        "y": 700,
         "wires": []
     },
     {
@@ -343,44 +139,8 @@
         "label": "Mode Chrono",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 600,
-        "y": 880,
-        "wires": []
-    },
-    {
-        "id": "39c617b9.53399",
-        "type": "function",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Régulation",
-        "func": "tab = msg.payload.split(\"|\");\ntemp = tab [22];\nstate = \"Manuelle\"\nif (temp===\"01\")\n    state = \"Automatique\";\n\nmsg.payload = state;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 430,
-        "y": 940,
-        "wires": [
-            [
-                "b7a21a6.92e3a68",
-                "acfc8b6a.92eee8"
-            ]
-        ]
-    },
-    {
-        "id": "b7a21a6.92e3a68",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "Mode Régulation",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 830,
-        "y": 940,
+        "x": 880,
+        "y": 800,
         "wires": []
     },
     {
@@ -395,8 +155,8 @@
         "label": "Régulation",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 650,
-        "y": 980,
+        "x": 870,
+        "y": 900,
         "wires": []
     },
     {
@@ -421,8 +181,8 @@
         ],
         "seg1": "20",
         "seg2": "21",
-        "x": 600,
-        "y": 440,
+        "x": 900,
+        "y": 300,
         "wires": []
     },
     {
@@ -444,7 +204,7 @@
         "ymin": "",
         "ymax": "",
         "removeOlder": 1,
-        "removeOlderPoints": "",
+        "removeOlderPoints": "4320",
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
@@ -462,8 +222,8 @@
         ],
         "useOldStyle": false,
         "outputs": 1,
-        "x": 630,
-        "y": 480,
+        "x": 930,
+        "y": 340,
         "wires": [
             []
         ]
@@ -478,12 +238,11 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 610,
-        "y": 560,
+        "x": 890,
+        "y": 460,
         "wires": [
             [
-                "b4599768.c09818",
-                "1cd3da8f.84327d"
+                "b4599768.c09818"
             ]
         ]
     },
@@ -506,13 +265,13 @@
         "ymin": "",
         "ymax": "",
         "removeOlder": 1,
-        "removeOlderPoints": "",
+        "removeOlderPoints": "4320",
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
         "colors": [
-            "#1f77b4",
+            "#e11432",
             "#aec7e8",
             "#ff7f0e",
             "#2ca02c",
@@ -524,8 +283,8 @@
         ],
         "useOldStyle": false,
         "outputs": 1,
-        "x": 820,
-        "y": 560,
+        "x": 1120,
+        "y": 460,
         "wires": [
             []
         ]
@@ -548,8 +307,8 @@
         "name": "",
         "server": "",
         "client": "8bae72a3.51491",
-        "x": 680,
-        "y": 1120,
+        "x": 760,
+        "y": 1280,
         "wires": []
     },
     {
@@ -570,8 +329,8 @@
         "topic": "",
         "payload": "C|WriteParametri|23|00",
         "payloadType": "str",
-        "x": 400,
-        "y": 1120,
+        "x": 480,
+        "y": 1280,
         "wires": [
             [
                 "d10dfcef.c253c8"
@@ -579,29 +338,341 @@
         ]
     },
     {
-        "id": "1cd3da8f.84327d",
-        "type": "debug",
-        "z": "547cd5bb.6e5b94",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 520,
-        "wires": []
-    },
-    {
         "id": "193badc6.8456c2",
         "type": "comment",
         "z": "547cd5bb.6e5b94",
         "name": "With great power comes great responsibility",
         "info": "1111 -> O/1 chrono off / on",
-        "x": 570,
-        "y": 1080,
+        "x": 650,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "1bb299a4.a86b36",
+        "type": "ui_button",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "group": "2dd35ac0.440406",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Update",
+        "tooltip": "",
+        "color": "#000",
+        "bgcolor": "#80FFC8",
+        "icon": "refresh",
+        "payload": "C|RecuperoInfo",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "953fb1fc.a24e98"
+            ]
+        ]
+    },
+    {
+        "id": "deffffef.4024",
+        "type": "split",
+        "z": "547cd5bb.6e5b94",
+        "name": "Découpage",
+        "splt": "|",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 290,
+        "y": 460,
+        "wires": [
+            [
+                "608dc5c5.a0df3c"
+            ]
+        ]
+    },
+    {
+        "id": "608dc5c5.a0df3c",
+        "type": "switch",
+        "z": "547cd5bb.6e5b94",
+        "name": "",
+        "property": "parts.index",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "26",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "23",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "25",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "22",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 6,
+        "x": 450,
+        "y": 460,
+        "wires": [
+            [
+                "6c80a8f3.c1e9f8"
+            ],
+            [
+                "180937e5.4f6408"
+            ],
+            [
+                "26e2fbb3.9dd324"
+            ],
+            [
+                "ebb5ddf0.91976"
+            ],
+            [
+                "b10a6b.1e869598"
+            ],
+            [
+                "3e8c9b1e.4850f4"
+            ]
+        ]
+    },
+    {
+        "id": "6c80a8f3.c1e9f8",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Température",
+        "func": "temp = msg.payload\ntemp = parseInt(temp,16)/2;\nmsg.payload = temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 360,
+        "wires": [
+            [
+                "32bd560c.77bf9a",
+                "4952830c.a74afc",
+                "63c8ae71.b28cb"
+            ]
+        ]
+    },
+    {
+        "id": "32bd560c.77bf9a",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Température",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7097893e.ffbf48",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Etat",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "180937e5.4f6408",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Libellé Etat",
+        "func": "tab = msg.payload;\nindexEtat = parseInt(tab [1],16);\n\ndata = [{code:0,libelle: \"Eteint\"},\n{code:1,libelle: \"Controle du poele froid / chaud\"},\n{code:2,libelle: \"Clean Froid\"},\n{code:3,libelle: \"Load Froid\"},\n{code:4,libelle: \"Start 1 Froid\"},\n{code:5,libelle: \"Start 2 Froid\"},\n{code:6,libelle: \"Clean Chaud\"},\n{code:7,libelle: \"Load Chaud\"},\n{code:8,libelle: \"Start 1 chaud\"},\n{code:9,libelle: \"Start 2 chaud\"},\n{code:10,libelle: \"Stabilisation\"},\n{code:11,libelle: \"Puissance 1\"},\n{code:12,libelle: \"Puissance 2\"},\n{code:13,libelle: \"Puissance 3\"},\n{code:14,libelle: \"Puissance 4\"},\n{code:15,libelle: \"Puissance 5\"},\n{code:30,libelle: \"Mode diagnostique\"},\n{code:31,libelle: \"Marche\"},\n{code:40,libelle: \"Extinction\"},\n{code:41,libelle: \"Refroidissement en cours\"},\n{code:42,libelle: \"Nettoyage basse p.\"},\n{code:43,libelle: \"Nettoyage haute p.\"},\n{code:44,libelle: \"Débloquage vis sans fin\"},\n{code:45,libelle: \"AUTO ECO\"},\n{code:46,libelle: \"Standby\"},\n{code:48,libelle: \"Diagnostique\"},\n{code:49,libelle: \"CHARG. VIS SANS FIN\"},\n{code:50,libelle: \"Erreur A01 - Allumage raté\"},\n{code:51,libelle: \"Erreur A02 - Pas de flamme\"},\n{code:52,libelle: \"Erreur A03 - Surchauffe du réservoir\"},\n{code:53,libelle: \"Erreur A04 - Température des fumées trop haute\"},\n{code:54,libelle: \"Erreur A05 - Obstruction conduit - Vent\"},\n{code:55,libelle: \"Erreur A06 - Mauvais tirage\"},\n{code:56,libelle: \"Erreur A09 - Défaillance sonde de fumées\"},\n{code:57,libelle: \"Erreur A11 - Défaillance motoréducteur\"},\n{code:58,libelle: \"Erreur A13 - Température carte mère trop haute\"},\n{code:59,libelle: \"Erreur A14 - Défaut Active\"},\n{code:60,libelle: \"Erreur A18 - Température d'eau trop haute\"},\n{code:61,libelle: \"Erreur A19 - Défaut sonde température eau\"},\n{code:62,libelle: \"Erreur A20 - Défaut sonde auxiliaire\"},\n{code:63,libelle: \"Erreur A21 - Alarme pressostat\"},\n{code:64,libelle: \"Erreur A22 - Défaut sonde ambiante\"},\n{code:65,libelle: \"Erreur A23 - Défaut fermeture brasero\"},\n{code:66,libelle: \"Erreur A12 - Panne controleur motoréducteur\"},\n{code:67,libelle: \"Erreur A17 - Bourrage vis sans fin\"},\n{code:69,libelle: \"Attente Alarmes securité\"}];\n\netat = data.find(tmp => tmp.code === indexEtat);\n\nmsg.payload = etat.libelle;\n\n\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "7097893e.ffbf48",
+                "dc157e51.54978",
+                "77e0a055.668068"
+            ]
+        ]
+    },
+    {
+        "id": "26e2fbb3.9dd324",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "TempConsigne",
+        "func": "tempc = msg.payload\ntempc = parseInt(tempc,16)/2;\nmsg.payload = tempc;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 660,
+        "y": 600,
+        "wires": [
+            [
+                "63ac9ac3.f82464",
+                "7d2dfaf9.a409cc"
+            ]
+        ]
+    },
+    {
+        "id": "63ac9ac3.f82464",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Temperature Consigne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ebb5ddf0.91976",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Eco",
+        "func": "eco = msg.payload\nstate = \"Désactivé\"\nif (eco===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 700,
+        "wires": [
+            [
+                "e9dc2021.6cf41",
+                "bf59cb25.57cda8"
+            ]
+        ]
+    },
+    {
+        "id": "b10a6b.1e869598",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Chrono",
+        "func": "chrono = msg.payload;\nstate = \"Désactivé\"\nif (chrono===\"01\")\n    state = \"Activé\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 660,
+        "y": 800,
+        "wires": [
+            [
+                "db3628a7.ff97b",
+                "9540ebcf.70efb8"
+            ]
+        ]
+    },
+    {
+        "id": "3e8c9b1e.4850f4",
+        "type": "function",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Régulation",
+        "func": "reg = msg.payload;\n\nstate = \"Manuelle\"\nif (reg===\"01\")\n    state = \"Automatique\";\n\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 670,
+        "y": 900,
+        "wires": [
+            [
+                "acfc8b6a.92eee8",
+                "a86c1f2f.3167c"
+            ]
+        ]
+    },
+    {
+        "id": "bf59cb25.57cda8",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Eco",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "9540ebcf.70efb8",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Chrono",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "a86c1f2f.3167c",
+        "type": "debug",
+        "z": "547cd5bb.6e5b94",
+        "name": "Mode Régulation",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 940,
         "wires": []
     },
     {
@@ -610,16 +681,6 @@
         "path": "ws://192.168.120.1:81/",
         "tls": "",
         "wholemsg": "false"
-    },
-    {
-        "id": "fb0a0886.53a18",
-        "type": "ui_group",
-        "name": "Rapport",
-        "tab": "e202dce0.bc10f",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
     },
     {
         "id": "b19a5d3f.a5cc58",
@@ -632,13 +693,24 @@
         "collapse": false
     },
     {
-        "id": "e202dce0.bc10f",
-        "type": "ui_tab",
-        "name": "Récap Infos",
-        "icon": "fa-cogs",
-        "order": 3,
-        "disabled": false,
-        "hidden": false
+        "id": "fb0a0886.53a18",
+        "type": "ui_group",
+        "name": "Rapport",
+        "tab": "e202dce0.bc10f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "2dd35ac0.440406",
+        "type": "ui_group",
+        "name": "Main",
+        "tab": "c1d0735d.51287",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "c1d0735d.51287",
@@ -646,6 +718,15 @@
         "name": "Infos",
         "icon": "fa-fire",
         "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e202dce0.bc10f",
+        "type": "ui_tab",
+        "name": "Récap Infos",
+        "icon": "fa-cogs",
+        "order": 3,
         "disabled": false,
         "hidden": false
     }
